@@ -1,0 +1,16 @@
+necessário python 3.10.5
+
+biblioteca fastapi:
+	pip install "fastapi[all]"
+
+ou execute na linha de comando:
+	pip install fastapi
+e
+	pip install "uvicorn[standard]"
+
+
+Para iniciar o servidor, abra a pasta FastAPI e no diretório que está o 'main.py' execute:
+	uvicorn main:app --reload
+
+acesse http://127.0.0.1:8000/docs#/ para uma página com a documentação e para testar. Pode testar pelo navegador também, porém neste link fica mais legível.
+
