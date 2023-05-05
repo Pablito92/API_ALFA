@@ -8,9 +8,11 @@ ou execute na linha de comando:
 e
 	pip install "uvicorn[standard]"
 
+No arquivo "routes.py" na pastas router, alterar o caminho do arquivo "sqlite_db.db" do banco de dados.
 
 Para iniciar o servidor, abra a pasta FastAPI e no diretório que está o 'main.py' execute:
 	uvicorn main:app --reload
+
 
 acesse http://127.0.0.1:8000/docs#/ para uma página com a documentação e para testar. Pode testar pelo navegador também, porém neste link fica mais legível.
 
