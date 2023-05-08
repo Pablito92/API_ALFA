@@ -6,6 +6,24 @@ from fastapi import APIRouter
 
 router = APIRouter()
 
+@router.put('/create/')
+async def create_ticket(titulo: str, codigo_cliente : int , codigo_modulo: int):
+
+    sql = codecs.open(r"C:/Users/pabli/Desktop/FastAPI/sqlite/INSERT_INTO_TICKET.sql", encoding='utf-8', mode='r').read()
+    sql = sql.replace('\r', '').replace('\n',' ').replace('\t', '') # remove quebras de linha '\n', form feed '\f' e tabs '\t'
+    sql = sql.replace('?','\''+ titulo + '\'', 1).replace('?', str(codigo_cliente), 1).replace('?', str(codigo_modulo), 1) # substitui os 3 '?' no SQL pelos parâmetros
+    print(sql)
+    
+    conn = sqlite3.connect(r'C:/Users/pabli/Desktop/FastAPI/sqlite/sqlite_db.db') ## mudar a localização para a da sua máquina    
+    cursor = conn.cursor()
+    cursor.execute(sql)
+
+    if cursor.rowcount >= 1:
+        cursor.execute('commit;')
+        return {'status': 'OK'}
+    else:
+        return {'status': 'ERROR'}
+
 @router.get("/search/") # acessar http://127.0.0.1:8000/search/?q=carrot para exemplo
 async def get_recipes(q : str = ""):
     response = requests.get("https://forkify-api.herokuapp.com/api/search/" + '?q=' + q)
